@@ -22,7 +22,11 @@ Gestión de usuarios, permitiendo registrar y controlar roles como administrador
 Venta de entradas y productos de CandyBar.
 
 Implementa: 
+
 Lenguaje de programación: Java 
+
 IDE: NetBeans 21.
+
 Almacenamiento: PostgreSQL (para registro de usuarios, películas y ventas).
+
 Interfaz Gráfica: Swing para las ventanas y menús del sistema.
