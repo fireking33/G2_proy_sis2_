@@ -1,14 +1,22 @@
 1. Titulo del proyecto: Sistema de gestion de cine
-2. Numero de grupo: 2
-3. Integrantes (Apellidos y nombres con su respectivo rol):
+   
+3. Numero de grupo: 2
+   
+5. Integrantes (Apellidos y nombres con su respectivo rol):
+   
 Banda Tellez Fernando   (Desarrollador)
+
 Fermin Pari Ricardo Mauricio (Scrum Master-Desarrollador)
+
 Luna Orozco Denilson Neydan (Q.A-Desarrollador)
+
 Main Rocabado Jairo Gael (Programador)
+
 Titichoca Veizaga Cristhian Joel (Q.A-Desarrollador)
+
 Product Owner (Todos)
 
-5. Descripción del modelo de negocio 
+7. Descripción del modelo de negocio 
 
 Aplicación:
 Este sistema está diseñado para empresa de cine que administrar y gestionar peliculas mediante un administrador y venta de tickets y Candy Bar mediante cajeros
