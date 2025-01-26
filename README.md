@@ -18,6 +18,7 @@ Uso Principal:
 Registro y administración de películas, incluyendo horarios y salas asignadas.
 
 Gestión de usuarios, permitiendo registrar y controlar roles como administradores y cajeros.
+
 Venta de entradas y productos de CandyBar.
 
 Implementa: 
