@@ -19,7 +19,7 @@ Product Owner (Todos)
 7. Descripción del modelo de negocio 
 
 Aplicación:
-Este sistema está diseñado para empresa de cine que administrar y gestionar peliculas mediante un administrador y venta de tickets,registrar datos de clientes y gestionar los pagos y Candy Bar mediante cajeros
+Este sistema está diseñado para empresa de cine que administrar y gestionar peliculas mediante un administrador y venta de tickets,registrar datos de clientes, gestionar los pagos y Candy Bar mediante cajeros
 
 Uso Principal:
 
