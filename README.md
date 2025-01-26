@@ -10,7 +10,7 @@ Fermin Pari Ricardo Mauricio (Scrum Master-Desarrollador)
 
 Luna Orozco Denilson Neydan (Q.A-Desarrollador)
 
-Main Rocabado Jairo Gael (Programador)
+Main Rocabado Jairo Gael (Desarrollador)
 
 Titichoca Veizaga Cristhian Joel (Q.A-Desarrollador)
 
