@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -418,7 +419,10 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,9 +498,82 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
     }//GEN-LAST:event_whatsaFMouseExited
 
     private void aniadirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadirBtnActionPerformed
-        // TODO add your handling code here:
+        agregarSala();
     }//GEN-LAST:event_aniadirBtnActionPerformed
 
+    private void agregarSala() {
+        // Obtener el nombre de la sala desde el JTextField
+        String nombreSala = nombreSalaText.getText().trim();
+
+        // Validar que el nombre de la sala no esté vacío
+        if (nombreSala.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre para la sala.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Capacidad fija de la sala
+        int capacidad = 216;
+
+        // Consulta SQL para insertar la sala en PostgreSQL
+        String sql = "INSERT INTO sala (nombre_sala, capacidad) VALUES (?, ?) RETURNING id_sala;";
+
+        try {
+            // Preparar la consulta en PostgreSQL
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nombreSala);
+            stmt.setInt(2, capacidad);
+
+            // Ejecutar la inserción y obtener el ID generado
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Sala añadida con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                // Limpiar el campo de texto
+                //nombreSalaText.setText("");
+
+                // Actualizar el JComboBox con las salas agregadas
+                cargarSalas();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al añadir la sala.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Cerrar recursos
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error en PostgreSQL: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void cargarSalas() {
+        // Limpiar el JComboBox antes de llenarlo
+        salasCombobox.removeAllItems();
+
+        // Consulta SQL para obtener todas las salas
+        String sql = "SELECT nombre_sala FROM sala";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            // Llenar el JComboBox con los resultados de la consulta
+            while (rs.next()) {
+                String nombreSala = rs.getString("nombre_sala");
+                salasCombobox.addItem(nombreSala);
+            }
+
+            // Cerrar recursos
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar las salas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
     private void aniadirBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aniadirBtnMouseEntered
        aniadirBtn.setBackground(Color.green);
     }//GEN-LAST:event_aniadirBtnMouseEntered
@@ -514,17 +591,33 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
     }//GEN-LAST:event_administrarBtnMouseExited
 
     private void administrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarBtnActionPerformed
-         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfazGestionFunciones().setVisible(true);
-            }
-        });
-       this.setVisible(false);
+        enviarSalaSeleccionada();
     }//GEN-LAST:event_administrarBtnActionPerformed
 
+    private void enviarSalaSeleccionada() {
+        // Obtener la sala seleccionada del JComboBox
+        String salaSeleccionada = (String) salasCombobox.getSelectedItem();
+
+        // Verificar que no sea null ni vacío
+        if (salaSeleccionada == null || salaSeleccionada.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una sala.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Enviar la sala seleccionada a la otra interfaz
+        InterfazGestionFunciones.setNomSala(salaSeleccionada);
+
+        // Abrir la ventana de gestión de funciones
+        InterfazGestionFunciones funcionesVentana = new InterfazGestionFunciones();
+        funcionesVentana.setVisible(true);
+
+        // Cerrar la ventana actual si se desea
+        //this.dispose();
+    }
+
+    
     private void salasComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salasComboboxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_salasComboboxActionPerformed
 
       

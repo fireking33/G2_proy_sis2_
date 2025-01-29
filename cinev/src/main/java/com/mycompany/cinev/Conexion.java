@@ -17,7 +17,7 @@ public class Conexion {
       Connection conectar = null;
     
     String usuario = "postgres";
-    String contrasenia = "12345";
+    String contrasenia = "12841055";
     String bd = "Sistema_Cine";
     String ip = "localhost";
     String puerto = "5432";

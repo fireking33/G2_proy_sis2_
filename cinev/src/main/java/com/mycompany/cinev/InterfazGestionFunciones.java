@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -25,10 +26,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class InterfazGestionFunciones extends javax.swing.JFrame {
     
-  int xMouse, yMouse;
-  private String rutaImagen; 
-  private Conexion conexion = new Conexion();
+    int xMouse, yMouse;
+    private String rutaImagen; 
+    private Conexion conexion = new Conexion();
     Connection con = conexion.establecerConexion();
+
+    // Variable estática para recibir el nombre de la sala
+    public static String nomSala;
     
     /**
      * Creates new form InterfazRegPeli
@@ -41,10 +45,45 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
         SetImageLabel(ticlbl,"src/main/java/images/Ticket75.png");
         SetImageLabel(usulbl,"src/main/java/images/User75.png");
         SetImageLabel(whatsalbl,"src/main/java/images/Whats75.png");
+        cargarPeliculas(); // Llamar a la función para llenar el JComboBox de películas
     }
     
+    // Método para recibir el nombre de la sala desde otra clase
+    public static void setNomSala(String sala) {
+        nomSala = sala;
+    }
 
+    private void cargarPeliculas() {
+    // Limpiar el JComboBox antes de llenarlo
+    peliculasComboBox.removeAllItems();
 
+    // Consulta SQL para obtener los nombres de las películas
+    String sql = "SELECT nombre_pelicula FROM pelicula ORDER BY nombre_pelicula ASC";
+
+    try (PreparedStatement stmt = con.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        // Verificar si hay películas en la BD
+        if (!rs.isBeforeFirst()) {
+            JOptionPane.showMessageDialog(this, "No hay películas registradas.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Llenar el JComboBox con los nombres de las películas
+        while (rs.next()) {
+            String nombrePelicula = rs.getString("nombre_pelicula");
+            if (nombrePelicula != null && !nombrePelicula.trim().isEmpty()) {
+                peliculasComboBox.addItem(nombrePelicula);
+            }
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al cargar las películas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,8 +108,6 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
         prece = new javax.swing.JPanel();
         guardar = new javax.swing.JPanel();
         cerrarlbl = new javax.swing.JLabel();
-        subTitulosHorarios = new javax.swing.JLabel();
-        funcionesComboBox = new javax.swing.JComboBox<>();
         peliculasComboBox = new javax.swing.JComboBox<>();
         tituloGestion = new javax.swing.JLabel();
         subTituloFunciones = new javax.swing.JLabel();
@@ -81,11 +118,10 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
         aniadirBtn = new javax.swing.JToggleButton();
         subAnia1 = new javax.swing.JLabel();
         funcionesParaModificarComboBox1 = new javax.swing.JComboBox<>();
-        jPanel1 = new javax.swing.JPanel();
-        paraNombrePeliculaLbl = new javax.swing.JLabel();
         subtitulosPeliculas1 = new javax.swing.JLabel();
         buscarBtn = new javax.swing.JToggleButton();
         eliminarBtn = new javax.swing.JToggleButton();
+        nombrePelicula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(11, 23, 128));
@@ -320,23 +356,6 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
 
         bg.add(prece, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 730, -1));
 
-        subTitulosHorarios.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        subTitulosHorarios.setForeground(new java.awt.Color(255, 255, 255));
-        subTitulosHorarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        subTitulosHorarios.setText("Horario:");
-        bg.add(subTitulosHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 140, 40));
-
-        funcionesComboBox.setBackground(new java.awt.Color(102, 0, 102));
-        funcionesComboBox.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        funcionesComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        funcionesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        funcionesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funcionesComboBoxActionPerformed(evt);
-            }
-        });
-        bg.add(funcionesComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 160, 30));
-
         peliculasComboBox.setBackground(new java.awt.Color(102, 0, 102));
         peliculasComboBox.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         peliculasComboBox.setForeground(new java.awt.Color(255, 255, 255));
@@ -378,29 +397,29 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 horarioTextoMousePressed(evt);
             }
         });
+        horarioTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                horarioTextoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout horarioPanelLayout = new javax.swing.GroupLayout(horarioPanel);
         horarioPanel.setLayout(horarioPanelLayout);
         horarioPanelLayout.setHorizontalGroup(
             horarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-            .addGroup(horarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(horarioPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, horarioPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         horarioPanelLayout.setVerticalGroup(
             horarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(horarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(horarioPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, horarioPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bg.add(horarioPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 150, 30));
+        bg.add(horarioPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 150, 30));
 
         subAnia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subAnia.setForeground(new java.awt.Color(255, 255, 255));
@@ -426,7 +445,7 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 aniadirBtnActionPerformed(evt);
             }
         });
-        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 160, 40));
+        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 160, 40));
 
         subAnia1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subAnia1.setForeground(new java.awt.Color(255, 255, 255));
@@ -443,25 +462,7 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 funcionesParaModificarComboBox1ActionPerformed(evt);
             }
         });
-        bg.add(funcionesParaModificarComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 160, 30));
-
-        jPanel1.setBackground(new java.awt.Color(102, 0, 102));
-
-        paraNombrePeliculaLbl.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        paraNombrePeliculaLbl.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paraNombrePeliculaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paraNombrePeliculaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, 240, 40));
+        bg.add(funcionesParaModificarComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 190, 30));
 
         subtitulosPeliculas1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subtitulosPeliculas1.setForeground(new java.awt.Color(255, 255, 255));
@@ -508,6 +509,13 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
             }
         });
         bg.add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 160, 40));
+
+        nombrePelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrePeliculaActionPerformed(evt);
+            }
+        });
+        bg.add(nombrePelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -588,10 +596,6 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
          whatsaF.setBackground(new Color(17,27,82)); 
     }//GEN-LAST:event_whatsaFMouseExited
 
-    private void funcionesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionesComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_funcionesComboBoxActionPerformed
-
     private void peliculasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peliculasComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_peliculasComboBoxActionPerformed
@@ -612,9 +616,90 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     }//GEN-LAST:event_aniadirBtnMouseExited
 
     private void aniadirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadirBtnActionPerformed
-        // TODO add your handling code here:
+        agregarFuncion();
     }//GEN-LAST:event_aniadirBtnActionPerformed
 
+    private void agregarFuncion() {
+        // Obtener el horario del JTextField
+        String horario = horarioTexto.getText().trim();
+
+        // Validar que el horario no esté vacío
+        if (horario.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un horario en formato HH:MM:SS.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que haya una película seleccionada
+        String nombrePelicula = (String) peliculasComboBox.getSelectedItem();
+        if (nombrePelicula == null || nombrePelicula.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una película.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el nombre de la sala (nomSala) no sea nulo
+        if (nomSala == null || nomSala.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado una sala.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Obtener el ID de la sala basada en el nombre almacenado en nomSala
+            String sqlSala = "SELECT id_sala FROM sala WHERE nombre_sala = ?";
+            PreparedStatement stmtSala = con.prepareStatement(sqlSala);
+            stmtSala.setString(1, nomSala);
+            ResultSet rsSala = stmtSala.executeQuery();
+
+            int idSala = -1;
+            if (rsSala.next()) {
+                idSala = rsSala.getInt("id_sala");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la sala en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            rsSala.close();
+            stmtSala.close();
+
+            // Obtener el ID de la película basada en el nombre seleccionado
+            String sqlPelicula = "SELECT id_pelicula FROM pelicula WHERE nombre_pelicula = ?";
+            PreparedStatement stmtPelicula = con.prepareStatement(sqlPelicula);
+            stmtPelicula.setString(1, nombrePelicula);
+            ResultSet rsPelicula = stmtPelicula.executeQuery();
+
+            int idPelicula = -1;
+            if (rsPelicula.next()) {
+                idPelicula = rsPelicula.getInt("id_pelicula");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la película en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            rsPelicula.close();
+            stmtPelicula.close();
+
+            // Insertar la función en la base de datos
+            String sqlInsert = "INSERT INTO funcion (id_sala, id_pelicula, fecha_hora_funcion) VALUES (?, ?, ?::TIME)";
+            PreparedStatement stmtInsert = con.prepareStatement(sqlInsert);
+            stmtInsert.setInt(1, idSala);
+            stmtInsert.setInt(2, idPelicula);
+            stmtInsert.setString(3, horario);  // PostgreSQL convierte automáticamente a tipo TIME
+
+            int filasAfectadas = stmtInsert.executeUpdate();
+            stmtInsert.close();
+
+            // Verificar si la inserción fue exitosa
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(this, "Función añadida con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                horarioTexto.setText("");  // Limpiar el campo horarioTexto después de la inserción
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al añadir la función.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error en PostgreSQL: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
     private void funcionesParaModificarComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionesParaModificarComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_funcionesParaModificarComboBox1ActionPerformed
@@ -628,9 +713,68 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarBtnMouseExited
 
     private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
+        cargarFuncionesPorPelicula();
     }//GEN-LAST:event_buscarBtnActionPerformed
 
+    private void cargarFuncionesPorPelicula() {
+        // Obtener el nombre de la película desde el JTextField
+        String peliculaSeleccionada = nombrePelicula.getText().trim();
+
+        // Validar que el campo no esté vacío
+        if (peliculaSeleccionada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre de una película.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Limpiar el JComboBox antes de llenarlo
+        funcionesParaModificarComboBox1.removeAllItems();
+
+        try {
+            // Obtener el ID de la película basada en el nombre ingresado
+            String sqlPelicula = "SELECT id_pelicula FROM pelicula WHERE nombre_pelicula = ?";
+            PreparedStatement stmtPelicula = con.prepareStatement(sqlPelicula);
+            stmtPelicula.setString(1, peliculaSeleccionada);
+            ResultSet rsPelicula = stmtPelicula.executeQuery();
+
+            int idPelicula = -1;
+            if (rsPelicula.next()) {
+                idPelicula = rsPelicula.getInt("id_pelicula");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la película en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            rsPelicula.close();
+            stmtPelicula.close();
+
+            // Consultar las funciones asociadas a esa película
+            String sqlFunciones = "SELECT fecha_hora_funcion FROM funcion WHERE id_pelicula = ? ORDER BY fecha_hora_funcion ASC";
+            PreparedStatement stmtFunciones = con.prepareStatement(sqlFunciones);
+            stmtFunciones.setInt(1, idPelicula);
+            ResultSet rsFunciones = stmtFunciones.executeQuery();
+
+            // Verificar si hay funciones registradas
+            if (!rsFunciones.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(this, "No hay funciones registradas para esta película.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            // Agregar las funciones al JComboBox
+            while (rsFunciones.next()) {
+                String fechaHoraFuncion = rsFunciones.getString("fecha_hora_funcion");
+                funcionesParaModificarComboBox1.addItem(fechaHoraFuncion);
+            }
+
+            // Cerrar recursos
+            rsFunciones.close();
+            stmtFunciones.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar funciones: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
     private void eliminarBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMouseEntered
         eliminarBtn.setBackground(Color.red);
     }//GEN-LAST:event_eliminarBtnMouseEntered
@@ -640,8 +784,118 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarBtnMouseExited
 
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
-        // TODO add your handling code here:
+        eliminarFuncion();
     }//GEN-LAST:event_eliminarBtnActionPerformed
+
+    private void eliminarFuncion() {
+        // Obtener valores de los componentes
+        String salaSeleccionada = nomSala;
+        String peliculaSeleccionada = nombrePelicula.getText().trim();
+        String horarioSeleccionado = (String) funcionesParaModificarComboBox1.getSelectedItem();
+
+        // Validaciones previas
+        if (salaSeleccionada == null || salaSeleccionada.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado una sala.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (peliculaSeleccionada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre de una película.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (horarioSeleccionado == null || horarioSeleccionado.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un horario válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Obtener el ID de la sala
+            String sqlSala = "SELECT id_sala FROM sala WHERE nombre_sala = ?";
+            PreparedStatement stmtSala = con.prepareStatement(sqlSala);
+            stmtSala.setString(1, salaSeleccionada);
+            ResultSet rsSala = stmtSala.executeQuery();
+
+            int idSala = -1;
+            if (rsSala.next()) {
+                idSala = rsSala.getInt("id_sala");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la sala en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            rsSala.close();
+            stmtSala.close();
+
+            // Obtener el ID de la película
+            String sqlPelicula = "SELECT id_pelicula FROM pelicula WHERE nombre_pelicula = ?";
+            PreparedStatement stmtPelicula = con.prepareStatement(sqlPelicula);
+            stmtPelicula.setString(1, peliculaSeleccionada);
+            ResultSet rsPelicula = stmtPelicula.executeQuery();
+
+            int idPelicula = -1;
+            if (rsPelicula.next()) {
+                idPelicula = rsPelicula.getInt("id_pelicula");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la película en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            rsPelicula.close();
+            stmtPelicula.close();
+
+            // Obtener el ID de la función
+            String sqlFuncion = "SELECT id_funcion FROM funcion WHERE id_sala = ? AND id_pelicula = ? AND fecha_hora_funcion = ?::TIME";
+            PreparedStatement stmtFuncion = con.prepareStatement(sqlFuncion);
+            stmtFuncion.setInt(1, idSala);
+            stmtFuncion.setInt(2, idPelicula);
+            stmtFuncion.setString(3, horarioSeleccionado);
+            ResultSet rsFuncion = stmtFuncion.executeQuery();
+
+            int idFuncion = -1;
+            if (rsFuncion.next()) {
+                idFuncion = rsFuncion.getInt("id_funcion");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la función en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            rsFuncion.close();
+            stmtFuncion.close();
+
+            // Confirmar eliminación
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar esta función?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            // Eliminar la función de la BD
+            String sqlEliminar = "DELETE FROM funcion WHERE id_funcion = ?";
+            PreparedStatement stmtEliminar = con.prepareStatement(sqlEliminar);
+            stmtEliminar.setInt(1, idFuncion);
+
+            int filasAfectadas = stmtEliminar.executeUpdate();
+            stmtEliminar.close();
+
+            // Verificar si la eliminación fue exitosa
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(this, "Función eliminada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                funcionesParaModificarComboBox1.removeItem(horarioSeleccionado); // Eliminar del JComboBox
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar la función.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error en PostgreSQL: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+    private void horarioTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horarioTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_horarioTextoActionPerformed
+
+    private void nombrePeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePeliculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombrePeliculaActionPerformed
 
       public static boolean esTextoNumerico(String texto) {
         // Si el texto es nulo o está vacío, no es numérico.
@@ -714,22 +968,19 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     private javax.swing.JLabel candylbl;
     private javax.swing.JLabel cerrarlbl;
     private javax.swing.JToggleButton eliminarBtn;
-    private javax.swing.JComboBox<String> funcionesComboBox;
     private javax.swing.JComboBox<String> funcionesParaModificarComboBox1;
     private javax.swing.JPanel guardar;
     private javax.swing.JPanel horarioPanel;
     private javax.swing.JTextField horarioTexto;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuF;
     private javax.swing.JLabel menulbl;
-    private javax.swing.JLabel paraNombrePeliculaLbl;
+    private javax.swing.JTextField nombrePelicula;
     private javax.swing.JComboBox<String> peliculasComboBox;
     private javax.swing.JPanel prece;
     private javax.swing.JLabel subAnia;
     private javax.swing.JLabel subAnia1;
     private javax.swing.JLabel subTituloFunciones;
-    private javax.swing.JLabel subTitulosHorarios;
     private javax.swing.JLabel subtitulosPeliculas;
     private javax.swing.JLabel subtitulosPeliculas1;
     private javax.swing.JPanel ticF;
