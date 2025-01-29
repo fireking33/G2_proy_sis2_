@@ -16,8 +16,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -102,6 +100,9 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
         menuF.setBackground(new java.awt.Color(17, 27, 82));
         menuF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuFMouseEntered(evt);
             }
@@ -642,6 +643,15 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eliminarBtnActionPerformed
+
+    private void menuFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseClicked
+       java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazGestionPelis().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_menuFMouseClicked
 
       public static boolean esTextoNumerico(String texto) {
         // Si el texto es nulo o está vacío, no es numérico.

@@ -78,6 +78,7 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         subTituloAdFun = new javax.swing.JLabel();
         salasCombobox = new javax.swing.JComboBox<>();
         administrarBtn = new javax.swing.JToggleButton();
+        subTituloAdFun1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(11, 23, 128));
@@ -94,6 +95,9 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         menuF.setBackground(new java.awt.Color(17, 27, 82));
         menuF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuFMouseEntered(evt);
             }
@@ -414,6 +418,12 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         });
         bg.add(administrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 160, 40));
 
+        subTituloAdFun1.setBackground(new java.awt.Color(13, 20, 58));
+        subTituloAdFun1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        subTituloAdFun1.setForeground(new java.awt.Color(255, 255, 255));
+        subTituloAdFun1.setText("Administrar Funciones de Salas:");
+        bg.add(subTituloAdFun1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 330, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -527,6 +537,15 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_salasComboboxActionPerformed
 
+    private void menuFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseClicked
+      java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazGestionPelis().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_menuFMouseClicked
+
       
       
 
@@ -591,6 +610,7 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
     private javax.swing.JPanel prece;
     private javax.swing.JComboBox<String> salasCombobox;
     private javax.swing.JLabel subTituloAdFun;
+    private javax.swing.JLabel subTituloAdFun1;
     private javax.swing.JLabel subTituloaniadir;
     private javax.swing.JPanel ticF;
     private javax.swing.JLabel ticlbl;

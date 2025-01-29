@@ -68,23 +68,23 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         whatsalbl = new javax.swing.JLabel();
         prece = new javax.swing.JPanel();
         guardar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        cerrarlbl = new javax.swing.JLabel();
+        duracionPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         duracion = new javax.swing.JTextField();
-        jPanel12 = new javax.swing.JPanel();
+        fechaPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         fechaEs = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
+        generoPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         genero = new javax.swing.JTextField();
-        jPanel13 = new javax.swing.JPanel();
+        titluloPanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         titulo = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
+        clasifPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         clasif = new javax.swing.JTextField();
-        guardar1 = new javax.swing.JPanel();
+        cancelarPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         paraFoto = new javax.swing.JLabel();
         guardar3 = new javax.swing.JPanel();
@@ -106,6 +106,9 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         menuF.setBackground(new java.awt.Color(17, 27, 82));
         menuF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuFMouseEntered(evt);
             }
@@ -285,10 +288,10 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("x");
+        cerrarlbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cerrarlbl.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cerrarlbl.setText("x");
 
         javax.swing.GroupLayout guardarLayout = new javax.swing.GroupLayout(guardar);
         guardar.setLayout(guardarLayout);
@@ -296,14 +299,14 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             guardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cerrarlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         guardarLayout.setVerticalGroup(
             guardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cerrarlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -324,7 +327,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
 
         bg.add(prece, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 730, -1));
 
-        jPanel8.setBackground(new java.awt.Color(102, 0, 102));
+        duracionPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -341,27 +344,27 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout duracionPanelLayout = new javax.swing.GroupLayout(duracionPanel);
+        duracionPanel.setLayout(duracionPanelLayout);
+        duracionPanelLayout.setHorizontalGroup(
+            duracionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(duracionPanelLayout.createSequentialGroup()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(duracion, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        duracionPanelLayout.setVerticalGroup(
+            duracionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(duracionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(duracion)
                 .addContainerGap())
         );
 
-        bg.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 40));
+        bg.add(duracionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 40));
 
-        jPanel12.setBackground(new java.awt.Color(102, 0, 102));
+        fechaPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -378,24 +381,24 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout fechaPanelLayout = new javax.swing.GroupLayout(fechaPanel);
+        fechaPanel.setLayout(fechaPanelLayout);
+        fechaPanelLayout.setHorizontalGroup(
+            fechaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fechaPanelLayout.createSequentialGroup()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaEs, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        fechaPanelLayout.setVerticalGroup(
+            fechaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(fechaEs)
         );
 
-        bg.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
+        bg.add(fechaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
 
-        jPanel11.setBackground(new java.awt.Color(102, 0, 102));
+        generoPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -412,24 +415,24 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout generoPanelLayout = new javax.swing.GroupLayout(generoPanel);
+        generoPanel.setLayout(generoPanelLayout);
+        generoPanelLayout.setHorizontalGroup(
+            generoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(generoPanelLayout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(genero, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        generoPanelLayout.setVerticalGroup(
+            generoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(genero)
         );
 
-        bg.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
+        bg.add(generoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
 
-        jPanel13.setBackground(new java.awt.Color(102, 0, 102));
+        titluloPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -454,27 +457,27 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout titluloPanelLayout = new javax.swing.GroupLayout(titluloPanel);
+        titluloPanel.setLayout(titluloPanelLayout);
+        titluloPanelLayout.setHorizontalGroup(
+            titluloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titluloPanelLayout.createSequentialGroup()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        titluloPanelLayout.setVerticalGroup(
+            titluloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titluloPanelLayout.createSequentialGroup()
+                .addGroup(titluloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(titulo)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 410, 40));
+        bg.add(titluloPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 410, 40));
 
-        jPanel10.setBackground(new java.awt.Color(102, 0, 102));
+        clasifPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -491,32 +494,35 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout clasifPanelLayout = new javax.swing.GroupLayout(clasifPanel);
+        clasifPanel.setLayout(clasifPanelLayout);
+        clasifPanelLayout.setHorizontalGroup(
+            clasifPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clasifPanelLayout.createSequentialGroup()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clasif, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        clasifPanelLayout.setVerticalGroup(
+            clasifPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(clasif)
         );
 
-        bg.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, -1));
+        bg.add(clasifPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, -1));
 
-        guardar1.setBackground(new java.awt.Color(102, 0, 102));
-        guardar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelarPanel.setBackground(new java.awt.Color(102, 0, 102));
+        cancelarPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelarPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelarPanelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                guardar1MouseEntered(evt);
+                cancelarPanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                guardar1MouseExited(evt);
+                cancelarPanelMouseExited(evt);
             }
         });
 
@@ -525,24 +531,24 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("CANCELAR");
 
-        javax.swing.GroupLayout guardar1Layout = new javax.swing.GroupLayout(guardar1);
-        guardar1.setLayout(guardar1Layout);
-        guardar1Layout.setHorizontalGroup(
-            guardar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardar1Layout.createSequentialGroup()
+        javax.swing.GroupLayout cancelarPanelLayout = new javax.swing.GroupLayout(cancelarPanel);
+        cancelarPanel.setLayout(cancelarPanelLayout);
+        cancelarPanelLayout.setHorizontalGroup(
+            cancelarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cancelarPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
-        guardar1Layout.setVerticalGroup(
-            guardar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardar1Layout.createSequentialGroup()
+        cancelarPanelLayout.setVerticalGroup(
+            cancelarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cancelarPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        bg.add(guardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 190, 70));
+        bg.add(cancelarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 190, 70));
 
         paraFoto.setBackground(new java.awt.Color(255, 255, 255));
         paraFoto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
@@ -756,13 +762,13 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         this.setLocation(x-xMouse,y-yMouse);
     }//GEN-LAST:event_preceMouseDragged
 
-    private void guardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar1MouseEntered
-        guardar1.setBackground(Color.red);
-    }//GEN-LAST:event_guardar1MouseEntered
+    private void cancelarPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarPanelMouseEntered
+        cancelarPanel.setBackground(Color.red);
+    }//GEN-LAST:event_cancelarPanelMouseEntered
 
-    private void guardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar1MouseExited
-        guardar1.setBackground(new Color(102,0,102));
-    }//GEN-LAST:event_guardar1MouseExited
+    private void cancelarPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarPanelMouseExited
+        cancelarPanel.setBackground(new Color(102,0,102));
+    }//GEN-LAST:event_cancelarPanelMouseExited
 
     private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
 
@@ -838,6 +844,24 @@ public class InterfazRegPeli extends javax.swing.JFrame {
     private void whatsaFMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whatsaFMouseExited
          whatsaF.setBackground(new Color(17,27,82)); 
     }//GEN-LAST:event_whatsaFMouseExited
+
+    private void menuFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseClicked
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdmin().setVisible(true);
+            }
+        });
+            this.setVisible(false);
+    }//GEN-LAST:event_menuFMouseClicked
+
+    private void cancelarPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarPanelMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazGestionPelis().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_cancelarPanelMouseClicked
 
       public static boolean esTextoNumerico(String texto) {
         // Si el texto es nulo o está vacío, no es numérico.
@@ -983,16 +1007,20 @@ private void guardarEnBD() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JPanel cancelarPanel;
     private javax.swing.JPanel candyF;
     private javax.swing.JLabel candylbl;
+    private javax.swing.JLabel cerrarlbl;
     private javax.swing.JTextField clasif;
+    private javax.swing.JPanel clasifPanel;
     private javax.swing.JTextField duracion;
+    private javax.swing.JPanel duracionPanel;
     private javax.swing.JTextField fechaEs;
+    private javax.swing.JPanel fechaPanel;
     private javax.swing.JTextField genero;
+    private javax.swing.JPanel generoPanel;
     private javax.swing.JPanel guardar;
-    private javax.swing.JPanel guardar1;
     private javax.swing.JPanel guardar3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1001,11 +1029,6 @@ private void guardarEnBD() {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuF;
     private javax.swing.JLabel menulbl;
@@ -1013,6 +1036,7 @@ private void guardarEnBD() {
     private javax.swing.JPanel prece;
     private javax.swing.JPanel ticF;
     private javax.swing.JLabel ticlbl;
+    private javax.swing.JPanel titluloPanel;
     private javax.swing.JTextField titulo;
     private javax.swing.JPanel usuF;
     private javax.swing.JLabel usulbl;
