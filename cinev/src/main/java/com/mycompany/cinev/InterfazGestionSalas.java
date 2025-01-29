@@ -5,8 +5,13 @@
 package com.mycompany.cinev;
 
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -19,7 +24,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author fband
  */
 public class InterfazGestionSalas extends javax.swing.JFrame {
+    
   int xMouse, yMouse;
+  private String rutaImagen; 
+  private Conexion conexion = new Conexion();
+    Connection con = conexion.establecerConexion();
+    
     /**
      * Creates new form InterfazRegPeli
      */
@@ -32,6 +42,8 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         SetImageLabel(usulbl,"src/main/java/images/User75.png");
         SetImageLabel(whatsalbl,"src/main/java/images/Whats75.png");
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,29 +67,17 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         whatsaF = new javax.swing.JPanel();
         whatsalbl = new javax.swing.JLabel();
         prece = new javax.swing.JPanel();
-        guardar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        duracion = new javax.swing.JTextField();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        fechaEs = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        genero = new javax.swing.JTextField();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        titulo = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        clasif = new javax.swing.JTextField();
-        guardar1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        paraFoto = new javax.swing.JLabel();
-        guardar3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        cerrarPanel = new javax.swing.JPanel();
+        cerrarlbl = new javax.swing.JLabel();
+        nombreSalaPanel = new javax.swing.JPanel();
+        nombreSalalbl = new javax.swing.JLabel();
+        nombreSalaText = new javax.swing.JTextField();
+        tituloGestionSalas = new javax.swing.JLabel();
+        aniadirBtn = new javax.swing.JToggleButton();
+        subTituloaniadir = new javax.swing.JLabel();
+        subTituloAdFun = new javax.swing.JLabel();
+        salasCombobox = new javax.swing.JComboBox<>();
+        administrarBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(11, 23, 128));
@@ -259,39 +259,39 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
             }
         });
 
-        guardar.setBackground(new java.awt.Color(102, 0, 102));
-        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+        cerrarPanel.setBackground(new java.awt.Color(102, 0, 102));
+        cerrarPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrarPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                guardarMouseClicked(evt);
+                cerrarPanelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                guardarMouseEntered(evt);
+                cerrarPanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                guardarMouseExited(evt);
+                cerrarPanelMouseExited(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("x");
+        cerrarlbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cerrarlbl.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cerrarlbl.setText("x");
 
-        javax.swing.GroupLayout guardarLayout = new javax.swing.GroupLayout(guardar);
-        guardar.setLayout(guardarLayout);
-        guardarLayout.setHorizontalGroup(
-            guardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarLayout.createSequentialGroup()
+        javax.swing.GroupLayout cerrarPanelLayout = new javax.swing.GroupLayout(cerrarPanel);
+        cerrarPanel.setLayout(cerrarPanelLayout);
+        cerrarPanelLayout.setHorizontalGroup(
+            cerrarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cerrarPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cerrarlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        guardarLayout.setVerticalGroup(
-            guardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarLayout.createSequentialGroup()
+        cerrarPanelLayout.setVerticalGroup(
+            cerrarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cerrarPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cerrarlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -301,289 +301,118 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
             preceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preceLayout.createSequentialGroup()
                 .addGap(0, 691, Short.MAX_VALUE)
-                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cerrarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         preceLayout.setVerticalGroup(
             preceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(preceLayout.createSequentialGroup()
-                .addComponent(guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cerrarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         bg.add(prece, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 730, -1));
 
-        jPanel8.setBackground(new java.awt.Color(102, 0, 102));
+        nombreSalaPanel.setBackground(new java.awt.Color(102, 0, 102));
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Duracion:");
+        nombreSalalbl.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        nombreSalalbl.setForeground(new java.awt.Color(255, 255, 255));
+        nombreSalalbl.setText("Nombre de Sala:");
 
-        duracion.setBackground(new java.awt.Color(102, 0, 102));
-        duracion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        duracion.setForeground(java.awt.Color.gray);
-        duracion.setText("130 (minutos)");
-        duracion.setBorder(null);
-        duracion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                duracionMousePressed(evt);
-            }
-        });
+        nombreSalaText.setBackground(new java.awt.Color(102, 0, 102));
+        nombreSalaText.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        nombreSalaText.setForeground(new java.awt.Color(255, 255, 255));
+        nombreSalaText.setBorder(null);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(duracion, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout nombreSalaPanelLayout = new javax.swing.GroupLayout(nombreSalaPanel);
+        nombreSalaPanel.setLayout(nombreSalaPanelLayout);
+        nombreSalaPanelLayout.setHorizontalGroup(
+            nombreSalaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nombreSalaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(duracion)
+                .addComponent(nombreSalalbl, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombreSalaText, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        bg.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 40));
-
-        jPanel12.setBackground(new java.awt.Color(102, 0, 102));
-
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Fecha de estreno:");
-
-        fechaEs.setBackground(new java.awt.Color(102, 0, 102));
-        fechaEs.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        fechaEs.setForeground(java.awt.Color.gray);
-        fechaEs.setText("27.06.03");
-        fechaEs.setBorder(null);
-        fechaEs.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                fechaEsMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fechaEs, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addComponent(fechaEs)
-        );
-
-        bg.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
-
-        jPanel11.setBackground(new java.awt.Color(102, 0, 102));
-
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Genero:");
-
-        genero.setBackground(new java.awt.Color(102, 0, 102));
-        genero.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        genero.setForeground(java.awt.Color.gray);
-        genero.setText("Accion");
-        genero.setBorder(null);
-        genero.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                generoMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(genero, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addComponent(genero)
-        );
-
-        bg.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
-
-        jPanel13.setBackground(new java.awt.Color(102, 0, 102));
-
-        jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("TItulo:");
-
-        titulo.setBackground(new java.awt.Color(102, 0, 102));
-        titulo.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        titulo.setForeground(java.awt.Color.gray);
-        titulo.setText("Matrix 2: Recargado");
-        titulo.setBorder(null);
-        titulo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tituloMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tituloMousePressed(evt);
-            }
-        });
-        titulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tituloActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(titulo)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+        nombreSalaPanelLayout.setVerticalGroup(
+            nombreSalaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nombreSalaPanelLayout.createSequentialGroup()
+                .addGroup(nombreSalaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nombreSalaText)
+                    .addComponent(nombreSalalbl, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 410, 40));
+        bg.add(nombreSalaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 400, 40));
 
-        jPanel10.setBackground(new java.awt.Color(102, 0, 102));
+        tituloGestionSalas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        tituloGestionSalas.setForeground(new java.awt.Color(255, 255, 255));
+        tituloGestionSalas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloGestionSalas.setText("Gestion de Salas");
+        bg.add(tituloGestionSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 390, 40));
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Clasificación:");
-
-        clasif.setBackground(new java.awt.Color(102, 0, 102));
-        clasif.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        clasif.setForeground(java.awt.Color.gray);
-        clasif.setText("R");
-        clasif.setBorder(null);
-        clasif.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                clasifMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clasif, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addComponent(clasif)
-        );
-
-        bg.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, -1));
-
-        guardar1.setBackground(new java.awt.Color(102, 0, 102));
-        guardar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        aniadirBtn.setBackground(new java.awt.Color(102, 0, 102));
+        aniadirBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        aniadirBtn.setForeground(new java.awt.Color(255, 255, 255));
+        aniadirBtn.setText("AÑADIR+");
+        aniadirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        aniadirBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                guardar1MouseEntered(evt);
+                aniadirBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                guardar1MouseExited(evt);
+                aniadirBtnMouseExited(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("CANCELAR");
-
-        javax.swing.GroupLayout guardar1Layout = new javax.swing.GroupLayout(guardar1);
-        guardar1.setLayout(guardar1Layout);
-        guardar1Layout.setHorizontalGroup(
-            guardar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardar1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-        guardar1Layout.setVerticalGroup(
-            guardar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardar1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        bg.add(guardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 190, 70));
-
-        paraFoto.setBackground(new java.awt.Color(255, 255, 255));
-        paraFoto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-        paraFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        paraFoto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                paraFotoMouseClicked(evt);
+        aniadirBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aniadirBtnActionPerformed(evt);
             }
         });
-        bg.add(paraFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 230, 290));
+        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 160, 40));
 
-        guardar3.setBackground(new java.awt.Color(102, 0, 102));
-        guardar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                guardar3MouseClicked(evt);
+        subTituloaniadir.setBackground(new java.awt.Color(13, 20, 58));
+        subTituloaniadir.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        subTituloaniadir.setForeground(new java.awt.Color(255, 255, 255));
+        subTituloaniadir.setText("Añadir Sala:");
+        bg.add(subTituloaniadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 280, 30));
+
+        subTituloAdFun.setBackground(new java.awt.Color(13, 20, 58));
+        subTituloAdFun.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        subTituloAdFun.setForeground(new java.awt.Color(255, 255, 255));
+        subTituloAdFun.setText("Administrar Funciones de Salas:");
+        bg.add(subTituloAdFun, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 330, 30));
+
+        salasCombobox.setBackground(new java.awt.Color(102, 0, 102));
+        salasCombobox.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        salasCombobox.setForeground(new java.awt.Color(255, 255, 255));
+        salasCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        salasCombobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salasComboboxActionPerformed(evt);
             }
+        });
+        bg.add(salasCombobox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 360, 30));
+
+        administrarBtn.setBackground(new java.awt.Color(102, 0, 102));
+        administrarBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        administrarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        administrarBtn.setText("Administrar");
+        administrarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        administrarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                guardar3MouseEntered(evt);
+                administrarBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                guardar3MouseExited(evt);
+                administrarBtnMouseExited(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("GUARDAR");
-
-        javax.swing.GroupLayout guardar3Layout = new javax.swing.GroupLayout(guardar3);
-        guardar3.setLayout(guardar3Layout);
-        guardar3Layout.setHorizontalGroup(
-            guardar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardar3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        guardar3Layout.setVerticalGroup(
-            guardar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardar3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        bg.add(guardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Registrar Pelicula");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 380, 40));
+        administrarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                administrarBtnActionPerformed(evt);
+            }
+        });
+        bg.add(administrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 160, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -599,138 +428,13 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tituloActionPerformed
+    private void cerrarPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarPanelMouseEntered
+       cerrarPanel.setBackground(Color.red);
+    }//GEN-LAST:event_cerrarPanelMouseEntered
 
-    private void tituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tituloMouseClicked
-
-    private void tituloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloMousePressed
-        if(titulo.getText().equals("Matrix 2: Recargado")){
-        titulo.setText("");
-       titulo.setForeground(Color.white);
-       }
-       if(duracion.getText().isEmpty()){
-           duracion.setText("130 (minutos)");
-           duracion.setForeground(Color.gray);
-       }
-       if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
-           fechaEs.setForeground(Color.gray);
-       }
-       if(genero.getText().isEmpty()){
-           genero.setText("Accion");
-           genero.setForeground(Color.gray);
-       }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
-    }//GEN-LAST:event_tituloMousePressed
-
-    private void duracionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_duracionMousePressed
-       if(duracion.getText().equals("130 (minutos)")){
-             duracion.setText("");
-       duracion.setForeground(Color.white);
-        }
-        if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
-           fechaEs.setForeground(Color.gray);
-       }
-       if(genero.getText().isEmpty()){
-           genero.setText("Accion");
-           genero.setForeground(Color.gray);
-       }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
-       if(titulo.getText().isEmpty()){
-           titulo.setText("Matrix 2: Recargado");
-           titulo.setForeground(Color.gray);
-       }
-    }//GEN-LAST:event_duracionMousePressed
-
-    private void fechaEsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechaEsMousePressed
-           
-        if(fechaEs.getText().equals("27.06.03")){
-           fechaEs.setText("");
-       fechaEs.setForeground(Color.white);
-       }
-        if(genero.getText().isEmpty()){
-           genero.setText("Accion");
-           genero.setForeground(Color.gray);
-       }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
-        if(titulo.getText().isEmpty()){
-           titulo.setText("Matrix 2: Recargado");
-           titulo.setForeground(Color.gray);
-       }
-        if(duracion.getText().isEmpty()){
-           duracion.setText("130 (minutos)");
-           duracion.setForeground(Color.gray);
-       }
-    }//GEN-LAST:event_fechaEsMousePressed
-
-    private void generoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generoMousePressed
-        if(genero.getText().equals("Accion")){
-           genero.setText("");
-       genero.setForeground(Color.white);
-       }
-        if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
-           fechaEs.setForeground(Color.gray);
-       }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
-        if(titulo.getText().isEmpty()){
-           titulo.setText("Matrix 2: Recargado");
-           titulo.setForeground(Color.gray);
-       }
-        if(duracion.getText().isEmpty()){
-           duracion.setText("130 (minutos)");
-           duracion.setForeground(Color.gray);
-       }
-    }//GEN-LAST:event_generoMousePressed
-
-    private void clasifMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clasifMousePressed
-         if(clasif.getText().equals("R")){
-           clasif.setText("");
-       clasif.setForeground(Color.white);
-       }
-        if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
-           fechaEs.setForeground(Color.gray);
-       }
-       
-       if(genero.getText().isEmpty()){
-           genero.setText("Accion");
-           genero.setForeground(Color.gray);
-       }
-        if(titulo.getText().isEmpty()){
-           titulo.setText("Matrix 2: Recargado");
-           titulo.setForeground(Color.gray);
-       }
-        if(duracion.getText().isEmpty()){
-           duracion.setText("130 (minutos)");
-           duracion.setForeground(Color.gray);
-       }
-    }//GEN-LAST:event_clasifMousePressed
-
-    private void guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseEntered
-       guardar.setBackground(Color.red);
-    }//GEN-LAST:event_guardarMouseEntered
-
-    private void guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseExited
-        guardar.setBackground(new Color(102,0,102));
-    }//GEN-LAST:event_guardarMouseExited
+    private void cerrarPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarPanelMouseExited
+        cerrarPanel.setBackground(new Color(102,0,102));
+    }//GEN-LAST:event_cerrarPanelMouseExited
 
     private void preceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preceMousePressed
         xMouse=evt.getX();
@@ -744,57 +448,9 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         this.setLocation(x-xMouse,y-yMouse);
     }//GEN-LAST:event_preceMouseDragged
 
-    private void guardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar1MouseEntered
-        guardar1.setBackground(Color.red);
-    }//GEN-LAST:event_guardar1MouseEntered
+    private void cerrarPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarPanelMouseClicked
 
-    private void guardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar1MouseExited
-        guardar1.setBackground(new Color(102,0,102));
-    }//GEN-LAST:event_guardar1MouseExited
-
-    private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
-
-        System.exit(0);    }//GEN-LAST:event_guardarMouseClicked
-
-    private void paraFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paraFotoMouseClicked
-        String Ruta ="";
-        JFileChooser jFileChooser = new JFileChooser();
-        FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JGP, PNG & GIF","jpg","png","gif");
-        jFileChooser.setFileFilter(filtrado);
-        int respuesta = jFileChooser.showOpenDialog(this);
-        if(respuesta== JFileChooser.APPROVE_OPTION){
-            Ruta=jFileChooser.getSelectedFile().getPath();
-            
-            Image mImagen = new ImageIcon(Ruta).getImage();
-            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(paraFoto.getWidth(), paraFoto.getHeight(), Image.SCALE_SMOOTH)); 
-             paraFoto.setIcon(mIcono);    
-        }
-    }//GEN-LAST:event_paraFotoMouseClicked
-
-    private void guardar3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar3MouseEntered
-        guardar3.setBackground(Color.green);
-    }//GEN-LAST:event_guardar3MouseEntered
-
-    private void guardar3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar3MouseExited
-        guardar3.setBackground(new Color(102,0,102));
-    }//GEN-LAST:event_guardar3MouseExited
-
-    private void guardar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar3MouseClicked
-       boolean camposVacios = titulo.getText().isEmpty() || duracion.getText().isEmpty() 
-                           || fechaEs.getText().isEmpty() || genero.getText().isEmpty() 
-                           || clasif.getText().isEmpty();
-    
-    boolean faltaFoto = paraFoto.getIcon() == null;
-
-    if (camposVacios || faltaFoto) {
-        JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    } else {
-        String exito="Titulo: "+titulo.getText()+"\n"+"Duración: "+duracion.getText()+
-                "\n"+"Fecha de Estreno: "+fechaEs.getText()+"\n"+"Genero: "+genero.getText()+"\n"+"Clasificación: "+clasif.getText();
-        JOptionPane.showMessageDialog(null, exito, "Éxito al registrar la Pelicula!!!!!", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);
-    }
-    }//GEN-LAST:event_guardar3MouseClicked
+        System.exit(0);    }//GEN-LAST:event_cerrarPanelMouseClicked
 
     private void menuFMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseEntered
         menuF.setBackground(new Color(153,153,255));
@@ -837,23 +493,43 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
          whatsaF.setBackground(new Color(17,27,82)); 
     }//GEN-LAST:event_whatsaFMouseExited
 
-      public static boolean esTextoNumerico(String texto) {
-        // Si el texto es nulo o está vacío, no es numérico.
-        if (texto == null || texto.equals("")) {
-            return false;
-        }
+    private void aniadirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadirBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aniadirBtnActionPerformed
 
-        // Recorremos cada carácter del texto.
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i); // Obtenemos el carácter en la posición actual.
-            if (c < '0' || c > '9') { // Verificamos si no es un número.
-                return false; // Si no es un número, devolvemos false.
+    private void aniadirBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aniadirBtnMouseEntered
+       aniadirBtn.setBackground(Color.green);
+    }//GEN-LAST:event_aniadirBtnMouseEntered
+
+    private void aniadirBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aniadirBtnMouseExited
+      aniadirBtn.setBackground(new Color(102,0,102));
+    }//GEN-LAST:event_aniadirBtnMouseExited
+
+    private void administrarBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administrarBtnMouseEntered
+        administrarBtn.setBackground(Color.green);
+    }//GEN-LAST:event_administrarBtnMouseEntered
+
+    private void administrarBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administrarBtnMouseExited
+         administrarBtn.setBackground(new Color(102,0,102));
+    }//GEN-LAST:event_administrarBtnMouseExited
+
+    private void administrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarBtnActionPerformed
+         
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazGestionFunciones().setVisible(true);
             }
-        }
+        });
+       this.setVisible(false);
+    }//GEN-LAST:event_administrarBtnActionPerformed
 
-        // Si todos los caracteres son números, devolvemos true.
-        return true;
-    }
+    private void salasComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salasComboboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salasComboboxActionPerformed
+
+      
+      
+
     /**
      * @param args the command line arguments
      */
@@ -899,38 +575,26 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton administrarBtn;
+    private javax.swing.JToggleButton aniadirBtn;
     private javax.swing.JPanel bg;
     private javax.swing.JPanel candyF;
     private javax.swing.JLabel candylbl;
-    private javax.swing.JTextField clasif;
-    private javax.swing.JTextField duracion;
-    private javax.swing.JTextField fechaEs;
-    private javax.swing.JTextField genero;
-    private javax.swing.JPanel guardar;
-    private javax.swing.JPanel guardar1;
-    private javax.swing.JPanel guardar3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel cerrarPanel;
+    private javax.swing.JLabel cerrarlbl;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuF;
     private javax.swing.JLabel menulbl;
-    private javax.swing.JLabel paraFoto;
+    private javax.swing.JPanel nombreSalaPanel;
+    private javax.swing.JTextField nombreSalaText;
+    private javax.swing.JLabel nombreSalalbl;
     private javax.swing.JPanel prece;
+    private javax.swing.JComboBox<String> salasCombobox;
+    private javax.swing.JLabel subTituloAdFun;
+    private javax.swing.JLabel subTituloaniadir;
     private javax.swing.JPanel ticF;
     private javax.swing.JLabel ticlbl;
-    private javax.swing.JTextField titulo;
+    private javax.swing.JLabel tituloGestionSalas;
     private javax.swing.JPanel usuF;
     private javax.swing.JLabel usulbl;
     private javax.swing.JPanel whatsaF;

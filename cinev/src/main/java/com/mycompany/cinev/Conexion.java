@@ -29,7 +29,7 @@ public class Conexion {
         try {
             Class.forName("org.postgresql.Driver");
             conectar = DriverManager.getConnection(cadena, usuario, contrasenia);
-            JOptionPane.showMessageDialog(null, "Se conecto correctamente a la Base de Datos");
+            //JOptionPane.showMessageDialog(null, "Se conecto correctamente a la Base de Datos");
             
         } catch (Exception e) {
             JOptionPane.showInternalMessageDialog(null,"Error al conectar a la base de datos, error: "+e.toString());

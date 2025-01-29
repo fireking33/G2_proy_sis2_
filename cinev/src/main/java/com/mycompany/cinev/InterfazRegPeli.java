@@ -5,8 +5,13 @@
 package com.mycompany.cinev;
 
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -19,7 +24,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author fband
  */
 public class InterfazRegPeli extends javax.swing.JFrame {
+    
   int xMouse, yMouse;
+  private String rutaImagen; 
+  private Conexion conexion = new Conexion();
+    Connection con = conexion.establecerConexion();
+    
     /**
      * Creates new form InterfazRegPeli
      */
@@ -32,6 +42,8 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         SetImageLabel(usulbl,"src/main/java/images/User75.png");
         SetImageLabel(whatsalbl,"src/main/java/images/Whats75.png");
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -540,7 +552,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
                 paraFotoMouseClicked(evt);
             }
         });
-        bg.add(paraFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 230, 290));
+        bg.add(paraFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 240, 290));
 
         guardar3.setBackground(new java.awt.Color(102, 0, 102));
         guardar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -757,18 +769,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         System.exit(0);    }//GEN-LAST:event_guardarMouseClicked
 
     private void paraFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paraFotoMouseClicked
-        String Ruta ="";
-        JFileChooser jFileChooser = new JFileChooser();
-        FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JGP, PNG & GIF","jpg","png","gif");
-        jFileChooser.setFileFilter(filtrado);
-        int respuesta = jFileChooser.showOpenDialog(this);
-        if(respuesta== JFileChooser.APPROVE_OPTION){
-            Ruta=jFileChooser.getSelectedFile().getPath();
-            
-            Image mImagen = new ImageIcon(Ruta).getImage();
-            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(paraFoto.getWidth(), paraFoto.getHeight(), Image.SCALE_SMOOTH)); 
-             paraFoto.setIcon(mIcono);    
-        }
+        buscarImagen();
     }//GEN-LAST:event_paraFotoMouseClicked
 
     private void guardar3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar3MouseEntered
@@ -792,6 +793,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         String exito="Titulo: "+titulo.getText()+"\n"+"Duración: "+duracion.getText()+
                 "\n"+"Fecha de Estreno: "+fechaEs.getText()+"\n"+"Genero: "+genero.getText()+"\n"+"Clasificación: "+clasif.getText();
         JOptionPane.showMessageDialog(null, exito, "Éxito al registrar la Pelicula!!!!!", JOptionPane.INFORMATION_MESSAGE);
+         guardarEnBD();
         System.exit(0);
     }
     }//GEN-LAST:event_guardar3MouseClicked
@@ -854,6 +856,88 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         // Si todos los caracteres son números, devolvemos true.
         return true;
     }
+      private void buscarImagen() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagenes (JPG, PNG, GIF)", "jpg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            rutaImagen = file.getAbsolutePath();
+            ImageIcon icon = new ImageIcon(new ImageIcon(rutaImagen).getImage().getScaledInstance(paraFoto.getWidth(), paraFoto.getHeight(), Image.SCALE_SMOOTH));
+            paraFoto.setIcon(icon);
+        }
+    }
+private void guardarEnBD() {
+        String nombre = titulo.getText().trim();
+        String fechaEstreno = fechaEs.getText().trim();
+        String genero1 = genero.getText().trim();
+        String duracion1 = duracion.getText().trim();
+        String clasificacion = clasif.getText().trim();
+
+        if (paraFoto.getIcon() == null|| nombre.isEmpty() || fechaEstreno.isEmpty() || genero1.isEmpty() || duracion1.isEmpty() || clasificacion.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos y selecciona una imagen.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Validar formato de fecha
+            java.sql.Date sqlFechaEstreno;
+            try {
+                sqlFechaEstreno = java.sql.Date.valueOf(fechaEstreno);
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "El formato de la fecha debe ser YYYY-MM-DD.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validar duración como entero
+            int duracionInt;
+            try {
+                duracionInt = Integer.parseInt(duracion1);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "La duración debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validar que la imagen exista
+            File imagenFile = new File(rutaImagen);
+            if (!imagenFile.exists()) {
+                JOptionPane.showMessageDialog(this, "La imagen seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Leer la imagen como un InputStream
+            InputStream is = new FileInputStream(imagenFile);
+
+            // Consulta SQL para insertar los datos
+            String sql = "INSERT INTO pelicula (nombre_pelicula, fecha_estreno, genero, duracion, clasificacion, imagen) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Asignar valores a la consulta
+            ps.setString(1, nombre);
+            ps.setDate(2, sqlFechaEstreno);
+            ps.setString(3, genero1);
+            ps.setInt(4, duracionInt);
+            ps.setString(5, clasificacion);
+            ps.setBinaryStream(6, is, (int) imagenFile.length()); // Ahora el InputStream no se cierra prematuramente
+
+            // Ejecutar la consulta
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Película guardada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            // Cerrar recursos
+            ps.close();
+            is.close();
+
+         
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
