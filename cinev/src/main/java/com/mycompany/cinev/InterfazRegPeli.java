@@ -69,26 +69,26 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         prece = new javax.swing.JPanel();
         guardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        duracionPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         duracion = new javax.swing.JTextField();
-        jPanel12 = new javax.swing.JPanel();
+        fechaPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         fechaEs = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
+        generoPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         genero = new javax.swing.JTextField();
-        jPanel13 = new javax.swing.JPanel();
+        tituloPanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         titulo = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
+        clasPaneñ = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        clasif = new javax.swing.JTextField();
-        guardar1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        clasif = new javax.swing.JComboBox<>();
+        cancelarPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         paraFoto = new javax.swing.JLabel();
         guardar3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,11 +106,24 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         menuF.setBackground(new java.awt.Color(17, 27, 82));
         menuF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuFMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuFMouseExited(evt);
+            }
+        });
+
+        menulbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menulbl.setForeground(new java.awt.Color(204, 204, 204));
+        menulbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menulbl.setText("MENU");
+        menulbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menulblMouseClicked(evt);
             }
         });
 
@@ -143,6 +156,10 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
+        ticlbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ticlbl.setForeground(new java.awt.Color(204, 204, 204));
+        ticlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ticlbl.setText("VENDER");
         ticlbl.setPreferredSize(new java.awt.Dimension(70, 70));
 
         javax.swing.GroupLayout ticFLayout = new javax.swing.GroupLayout(ticF);
@@ -181,6 +198,11 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
+        candylbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        candylbl.setForeground(new java.awt.Color(204, 204, 204));
+        candylbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        candylbl.setText("CANDY");
+
         javax.swing.GroupLayout candyFLayout = new javax.swing.GroupLayout(candyF);
         candyF.setLayout(candyFLayout);
         candyFLayout.setHorizontalGroup(
@@ -216,6 +238,10 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
+        usulbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usulbl.setForeground(new java.awt.Color(204, 204, 204));
+        usulbl.setText("MENU US");
+
         javax.swing.GroupLayout usuFLayout = new javax.swing.GroupLayout(usuF);
         usuF.setLayout(usuFLayout);
         usuFLayout.setHorizontalGroup(
@@ -243,6 +269,11 @@ public class InterfazRegPeli extends javax.swing.JFrame {
                 whatsaFMouseExited(evt);
             }
         });
+
+        whatsalbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        whatsalbl.setForeground(new java.awt.Color(204, 204, 204));
+        whatsalbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        whatsalbl.setText("CONTACTO");
 
         javax.swing.GroupLayout whatsaFLayout = new javax.swing.GroupLayout(whatsaF);
         whatsaF.setLayout(whatsaFLayout);
@@ -324,7 +355,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
 
         bg.add(prece, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 730, -1));
 
-        jPanel8.setBackground(new java.awt.Color(102, 0, 102));
+        duracionPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -341,27 +372,27 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout duracionPanelLayout = new javax.swing.GroupLayout(duracionPanel);
+        duracionPanel.setLayout(duracionPanelLayout);
+        duracionPanelLayout.setHorizontalGroup(
+            duracionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(duracionPanelLayout.createSequentialGroup()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(duracion, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        duracionPanelLayout.setVerticalGroup(
+            duracionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(duracionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(duracion)
                 .addContainerGap())
         );
 
-        bg.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 40));
+        bg.add(duracionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 40));
 
-        jPanel12.setBackground(new java.awt.Color(102, 0, 102));
+        fechaPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -370,32 +401,37 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         fechaEs.setBackground(new java.awt.Color(102, 0, 102));
         fechaEs.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         fechaEs.setForeground(java.awt.Color.gray);
-        fechaEs.setText("27.06.03");
+        fechaEs.setText("AAAA-MM-DD");
         fechaEs.setBorder(null);
         fechaEs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 fechaEsMousePressed(evt);
             }
         });
+        fechaEs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaEsActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout fechaPanelLayout = new javax.swing.GroupLayout(fechaPanel);
+        fechaPanel.setLayout(fechaPanelLayout);
+        fechaPanelLayout.setHorizontalGroup(
+            fechaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fechaPanelLayout.createSequentialGroup()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaEs, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        fechaPanelLayout.setVerticalGroup(
+            fechaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(fechaEs)
         );
 
-        bg.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
+        bg.add(fechaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
 
-        jPanel11.setBackground(new java.awt.Color(102, 0, 102));
+        generoPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -412,24 +448,24 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout generoPanelLayout = new javax.swing.GroupLayout(generoPanel);
+        generoPanel.setLayout(generoPanelLayout);
+        generoPanelLayout.setHorizontalGroup(
+            generoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(generoPanelLayout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(genero, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        generoPanelLayout.setVerticalGroup(
+            generoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(genero)
         );
 
-        bg.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
+        bg.add(generoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
 
-        jPanel13.setBackground(new java.awt.Color(102, 0, 102));
+        tituloPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -454,95 +490,92 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout tituloPanelLayout = new javax.swing.GroupLayout(tituloPanel);
+        tituloPanel.setLayout(tituloPanelLayout);
+        tituloPanelLayout.setHorizontalGroup(
+            tituloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tituloPanelLayout.createSequentialGroup()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        tituloPanelLayout.setVerticalGroup(
+            tituloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tituloPanelLayout.createSequentialGroup()
+                .addGroup(tituloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(titulo)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 410, 40));
+        bg.add(tituloPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 410, 40));
 
-        jPanel10.setBackground(new java.awt.Color(102, 0, 102));
+        clasPaneñ.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Clasificación:");
 
         clasif.setBackground(new java.awt.Color(102, 0, 102));
-        clasif.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        clasif.setForeground(java.awt.Color.gray);
-        clasif.setText("R");
+        clasif.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clasif.setForeground(new java.awt.Color(255, 255, 255));
+        clasif.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "13", "16", "18" }));
         clasif.setBorder(null);
-        clasif.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                clasifMousePressed(evt);
-            }
-        });
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout clasPaneñLayout = new javax.swing.GroupLayout(clasPaneñ);
+        clasPaneñ.setLayout(clasPaneñLayout);
+        clasPaneñLayout.setHorizontalGroup(
+            clasPaneñLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clasPaneñLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clasif, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(clasif, 0, 293, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addComponent(clasif)
+        clasPaneñLayout.setVerticalGroup(
+            clasPaneñLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clasPaneñLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(clasPaneñLayout.createSequentialGroup()
+                .addComponent(clasif, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, -1));
+        bg.add(clasPaneñ, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, 40));
 
-        guardar1.setBackground(new java.awt.Color(102, 0, 102));
-        guardar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelarPanel.setBackground(new java.awt.Color(51, 255, 0));
+        cancelarPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelarPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                guardar1MouseEntered(evt);
+                cancelarPanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                guardar1MouseExited(evt);
+                cancelarPanelMouseExited(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("CANCELAR");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("GUARDAR");
 
-        javax.swing.GroupLayout guardar1Layout = new javax.swing.GroupLayout(guardar1);
-        guardar1.setLayout(guardar1Layout);
-        guardar1Layout.setHorizontalGroup(
-            guardar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardar1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+        javax.swing.GroupLayout cancelarPanelLayout = new javax.swing.GroupLayout(cancelarPanel);
+        cancelarPanel.setLayout(cancelarPanelLayout);
+        cancelarPanelLayout.setHorizontalGroup(
+            cancelarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cancelarPanelLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
-        guardar1Layout.setVerticalGroup(
-            guardar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardar1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addContainerGap())
+        cancelarPanelLayout.setVerticalGroup(
+            cancelarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cancelarPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bg.add(guardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 190, 70));
+        bg.add(cancelarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 170, 40));
 
         paraFoto.setBackground(new java.awt.Color(255, 255, 255));
         paraFoto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
@@ -552,9 +585,9 @@ public class InterfazRegPeli extends javax.swing.JFrame {
                 paraFotoMouseClicked(evt);
             }
         });
-        bg.add(paraFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 240, 290));
+        bg.add(paraFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 240, 290));
 
-        guardar3.setBackground(new java.awt.Color(102, 0, 102));
+        guardar3.setBackground(new java.awt.Color(255, 0, 0));
         guardar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardar3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -568,34 +601,38 @@ public class InterfazRegPeli extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("GUARDAR");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("CANCELAR");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout guardar3Layout = new javax.swing.GroupLayout(guardar3);
         guardar3.setLayout(guardar3Layout);
         guardar3Layout.setHorizontalGroup(
             guardar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardar3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 2, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         guardar3Layout.setVerticalGroup(
             guardar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardar3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(guardar3Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        bg.add(guardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
+        bg.add(guardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 170, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Registro de Pelicula");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 390, 40));
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 66, 390, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -605,7 +642,10 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -629,17 +669,14 @@ public class InterfazRegPeli extends javax.swing.JFrame {
            duracion.setForeground(Color.gray);
        }
        if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
+           fechaEs.setText("AAAA-MM-DD");
            fechaEs.setForeground(Color.gray);
        }
        if(genero.getText().isEmpty()){
            genero.setText("Accion");
            genero.setForeground(Color.gray);
        }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
+       
     }//GEN-LAST:event_tituloMousePressed
 
     private void duracionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_duracionMousePressed
@@ -648,17 +685,14 @@ public class InterfazRegPeli extends javax.swing.JFrame {
        duracion.setForeground(Color.white);
         }
         if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
+           fechaEs.setText("AAAA-MM-DD");
            fechaEs.setForeground(Color.gray);
        }
        if(genero.getText().isEmpty()){
            genero.setText("Accion");
            genero.setForeground(Color.gray);
        }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
+      
        if(titulo.getText().isEmpty()){
            titulo.setText("Matrix 2: Recargado");
            titulo.setForeground(Color.gray);
@@ -667,7 +701,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
 
     private void fechaEsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechaEsMousePressed
            
-        if(fechaEs.getText().equals("27.06.03")){
+        if(fechaEs.getText().equals("AAAA-MM-DD")){
            fechaEs.setText("");
        fechaEs.setForeground(Color.white);
        }
@@ -675,10 +709,7 @@ public class InterfazRegPeli extends javax.swing.JFrame {
            genero.setText("Accion");
            genero.setForeground(Color.gray);
        }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
-       }
+       
         if(titulo.getText().isEmpty()){
            titulo.setText("Matrix 2: Recargado");
            titulo.setForeground(Color.gray);
@@ -695,12 +726,8 @@ public class InterfazRegPeli extends javax.swing.JFrame {
        genero.setForeground(Color.white);
        }
         if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
+           fechaEs.setText("AAAA-MM-DD");
            fechaEs.setForeground(Color.gray);
-       }
-       if(clasif.getText().isEmpty()){
-           clasif.setText("R");
-           clasif.setForeground(Color.gray);
        }
         if(titulo.getText().isEmpty()){
            titulo.setText("Matrix 2: Recargado");
@@ -711,30 +738,6 @@ public class InterfazRegPeli extends javax.swing.JFrame {
            duracion.setForeground(Color.gray);
        }
     }//GEN-LAST:event_generoMousePressed
-
-    private void clasifMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clasifMousePressed
-         if(clasif.getText().equals("R")){
-           clasif.setText("");
-       clasif.setForeground(Color.white);
-       }
-        if(fechaEs.getText().isEmpty()){
-           fechaEs.setText("27.06.03");
-           fechaEs.setForeground(Color.gray);
-       }
-       
-       if(genero.getText().isEmpty()){
-           genero.setText("Accion");
-           genero.setForeground(Color.gray);
-       }
-        if(titulo.getText().isEmpty()){
-           titulo.setText("Matrix 2: Recargado");
-           titulo.setForeground(Color.gray);
-       }
-        if(duracion.getText().isEmpty()){
-           duracion.setText("130 (minutos)");
-           duracion.setForeground(Color.gray);
-       }
-    }//GEN-LAST:event_clasifMousePressed
 
     private void guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseEntered
        guardar.setBackground(Color.red);
@@ -756,13 +759,13 @@ public class InterfazRegPeli extends javax.swing.JFrame {
         this.setLocation(x-xMouse,y-yMouse);
     }//GEN-LAST:event_preceMouseDragged
 
-    private void guardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar1MouseEntered
-        guardar1.setBackground(Color.red);
-    }//GEN-LAST:event_guardar1MouseEntered
+    private void cancelarPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarPanelMouseEntered
+        cancelarPanel.setBackground(Color.red);
+    }//GEN-LAST:event_cancelarPanelMouseEntered
 
-    private void guardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar1MouseExited
-        guardar1.setBackground(new Color(102,0,102));
-    }//GEN-LAST:event_guardar1MouseExited
+    private void cancelarPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarPanelMouseExited
+        cancelarPanel.setBackground(new Color(102,0,102));
+    }//GEN-LAST:event_cancelarPanelMouseExited
 
     private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
 
@@ -781,21 +784,70 @@ public class InterfazRegPeli extends javax.swing.JFrame {
     }//GEN-LAST:event_guardar3MouseExited
 
     private void guardar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardar3MouseClicked
-       boolean camposVacios = titulo.getText().isEmpty() || duracion.getText().isEmpty() 
-                           || fechaEs.getText().isEmpty() || genero.getText().isEmpty() 
-                           || clasif.getText().isEmpty();
-    
-    boolean faltaFoto = paraFoto.getIcon() == null;
+            // Validaciones de los campos
+         boolean camposVacios = titulo.getText().isEmpty() || duracion.getText().isEmpty() 
+                                || fechaEs.getText().isEmpty() || genero.getText().isEmpty();
 
-    if (camposVacios || faltaFoto) {
-        JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    } else {
-        String exito="Titulo: "+titulo.getText()+"\n"+"Duración: "+duracion.getText()+
-                "\n"+"Fecha de Estreno: "+fechaEs.getText()+"\n"+"Genero: "+genero.getText()+"\n"+"Clasificación: "+clasif.getText();
-        JOptionPane.showMessageDialog(null, exito, "Éxito al registrar la Pelicula!!!!!", JOptionPane.INFORMATION_MESSAGE);
+         boolean faltaFoto = paraFoto.getIcon() == null;
+
+         // Validación de título (solo letras y espacios)
+         boolean tituloValido = titulo.getText().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$");
+
+         // Validación de duración (solo números entre 10 y 499)
+         boolean duracionValida = duracion.getText().matches("^[0-9]+$");
+         int duracionNum = 0;
+         if (duracionValida) {
+             duracionNum = Integer.parseInt(duracion.getText());
+             duracionValida = (duracionNum >= 10 && duracionNum <= 499);
+         }
+
+         // Validación de género (solo letras y espacios)
+         boolean generoValido = genero.getText().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$");
+
+         // Acumulador de errores para mostrar mensajes de advertencia
+         String mensajeError = "";
+
+         if (camposVacios) {
+             mensajeError += "- Por favor llene todos los campos.\n";
+         }
+         if (!tituloValido) {
+             mensajeError += "- El título solo puede contener letras y espacios.\n";
+         }
+         if (!duracionValida) {
+             mensajeError += "- La duración debe ser un número entre 10 y 499 minutos.\n";
+         }
+         if (!generoValido) {
+             mensajeError += "- El género solo puede contener letras y espacios.\n";
+         }
+         if (faltaFoto) {
+             mensajeError += "- Debe subir una imagen.\n";
+         }
+
+         // Si hay errores, mostrar el mensaje y salir del método
+         if (!mensajeError.isEmpty()) {
+             JOptionPane.showMessageDialog(null, mensajeError, "Advertencia", JOptionPane.WARNING_MESSAGE);
+             return;
+         }
+
+         // Si pasa todas las validaciones, proceder con el registro
+         String exito = "Titulo: " + titulo.getText() + "\n" +
+                        "Duración: " + duracion.getText() + " minutos\n" +
+                        "Fecha de Estreno: " + fechaEs.getText() + "\n" +
+                        "Genero: " + genero.getText() + "\n" +
+                        "Clasificación: " + (String) clasif.getSelectedItem();
+
+         JOptionPane.showMessageDialog(null, exito, "Éxito al registrar la Película", JOptionPane.INFORMATION_MESSAGE);
+
+         // Guardar en la base de datos
          guardarEnBD();
-        System.exit(0);
-    }
+
+         // Abrir la interfaz de administración y cerrar la ventana actual
+         java.awt.EventQueue.invokeLater(new Runnable() {
+             public void run() {
+                 new InterfazAdmin().setVisible(true);
+             }
+         });
+         this.setVisible(false);
     }//GEN-LAST:event_guardar3MouseClicked
 
     private void menuFMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseEntered
@@ -839,6 +891,36 @@ public class InterfazRegPeli extends javax.swing.JFrame {
          whatsaF.setBackground(new Color(17,27,82)); 
     }//GEN-LAST:event_whatsaFMouseExited
 
+    private void menuFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseClicked
+       java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdmin().setVisible(true);
+            }
+        });
+       this.setVisible(false);
+    }//GEN-LAST:event_menuFMouseClicked
+
+    private void menulblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menulblMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdmin().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_menulblMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazGestionPelis().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void fechaEsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaEsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechaEsActionPerformed
+
       public static boolean esTextoNumerico(String texto) {
         // Si el texto es nulo o está vacío, no es numérico.
         if (texto == null || texto.equals("")) {
@@ -873,7 +955,7 @@ private void guardarEnBD() {
         String fechaEstreno = fechaEs.getText().trim();
         String genero1 = genero.getText().trim();
         String duracion1 = duracion.getText().trim();
-        String clasificacion = clasif.getText().trim();
+        String clasificacion =(String) clasif.getSelectedItem();
 
         if (paraFoto.getIcon() == null|| nombre.isEmpty() || fechaEstreno.isEmpty() || genero1.isEmpty() || duracion1.isEmpty() || clasificacion.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos y selecciona una imagen.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -929,9 +1011,7 @@ private void guardarEnBD() {
             // Cerrar recursos
             ps.close();
             is.close();
-
-         
-
+            
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -983,14 +1063,18 @@ private void guardarEnBD() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JPanel cancelarPanel;
     private javax.swing.JPanel candyF;
     private javax.swing.JLabel candylbl;
-    private javax.swing.JTextField clasif;
+    private javax.swing.JPanel clasPaneñ;
+    private javax.swing.JComboBox<String> clasif;
     private javax.swing.JTextField duracion;
+    private javax.swing.JPanel duracionPanel;
     private javax.swing.JTextField fechaEs;
+    private javax.swing.JPanel fechaPanel;
     private javax.swing.JTextField genero;
+    private javax.swing.JPanel generoPanel;
     private javax.swing.JPanel guardar;
-    private javax.swing.JPanel guardar1;
     private javax.swing.JPanel guardar3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1001,11 +1085,6 @@ private void guardarEnBD() {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuF;
     private javax.swing.JLabel menulbl;
@@ -1014,6 +1093,7 @@ private void guardarEnBD() {
     private javax.swing.JPanel ticF;
     private javax.swing.JLabel ticlbl;
     private javax.swing.JTextField titulo;
+    private javax.swing.JPanel tituloPanel;
     private javax.swing.JPanel usuF;
     private javax.swing.JLabel usulbl;
     private javax.swing.JPanel whatsaF;

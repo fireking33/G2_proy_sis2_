@@ -5,19 +5,17 @@
 package com.mycompany.cinev;
 
 import java.awt.Color;
-
+import java.awt.Font;
 import java.awt.Image;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -25,21 +23,51 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Butacas extends javax.swing.JFrame {
     
+    private String valorSeleccionado;
+    private String formatoSeleccionado;
+    
   int xMouse, yMouse;
   private String rutaImagen; 
   private Conexion conexion = new Conexion();
-    Connection con = conexion.establecerConexion();
-    
+  Connection con = conexion.establecerConexion();
+  
+    // Variables de conexión y almacenamiento de asientos
+    private static final ArrayList<String> asientosSeleccionados = new ArrayList<>();
+    private static final int FILAS = 9;
+    private static final int COLUMNAS = 16;
+    private final JToggleButton[][] botonesAsientos = new JToggleButton[FILAS][COLUMNAS];
+  
     /**
      * Creates new form InterfazRegPeli
      */
     public Butacas() {
+        this.valorSeleccionado = valorSeleccionado;
         initComponents();
-        this.setLocationRelativeTo(this);
-        
+        setLocationRelativeTo(null);
+        crearBotones();
     }
     
+    public Butacas(String valorSeleccionado) {
+        this.valorSeleccionado = valorSeleccionado;
+        initComponents();
+        formatoSeleccionado = valorSeleccionado;
+        setLocationRelativeTo(null);
+        crearBotones();
+    }
+    
+    public String getValorSeleccionado() {
+        return valorSeleccionado;
+    }
+    
+    private InterfazVenta interfazVenta; // Guardar la instancia de InterfazVenta
 
+    // Constructor que recibe la instancia de InterfazVenta
+    public Butacas(InterfazVenta interfazVenta) {
+        this.interfazVenta = interfazVenta; // Asignamos la instancia
+        initComponents();
+        setLocationRelativeTo(null);
+        crearBotones();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +83,7 @@ public class Butacas extends javax.swing.JFrame {
         guardar = new javax.swing.JPanel();
         cerrarlbl = new javax.swing.JLabel();
         titulolbl = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(11, 23, 128));
@@ -102,41 +131,55 @@ public class Butacas extends javax.swing.JFrame {
         guardar.setLayout(guardarLayout);
         guardarLayout.setHorizontalGroup(
             guardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(guardarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(cerrarlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         guardarLayout.setVerticalGroup(
             guardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(guardarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(cerrarlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(10, Short.MAX_VALUE))
         );
+
+        titulolbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        titulolbl.setForeground(new java.awt.Color(255, 255, 255));
+        titulolbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulolbl.setText("Butacas");
 
         javax.swing.GroupLayout preceLayout = new javax.swing.GroupLayout(prece);
         prece.setLayout(preceLayout);
         preceLayout.setHorizontalGroup(
             preceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preceLayout.createSequentialGroup()
-                .addGap(0, 691, Short.MAX_VALUE)
-                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(114, 114, 114)
+                .addComponent(titulolbl, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         preceLayout.setVerticalGroup(
             preceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(preceLayout.createSequentialGroup()
-                .addComponent(guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preceLayout.createSequentialGroup()
+                .addGroup(preceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(preceLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(titulolbl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         bg.add(prece, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 730, -1));
 
-        titulolbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        titulolbl.setForeground(new java.awt.Color(255, 255, 255));
-        titulolbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulolbl.setText("Butacas");
-        bg.add(titulolbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 390, 40));
+        jButton1.setText("CONTINUAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(669, 460, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,6 +201,64 @@ public class Butacas extends javax.swing.JFrame {
        guardar.setBackground(Color.red);
     }//GEN-LAST:event_guardarMouseEntered
 
+    private void crearBotones() {
+        bg.setLayout(null);
+
+        int ejeX = 10, ejeY = 55; // Se suben los asientos
+        Font fuenteLetra = new Font("Century Gothic", Font.BOLD, 11);
+
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                botonesAsientos[i][j] = new JToggleButton();
+                botonesAsientos[i][j].setBounds(ejeX, ejeY, 50, 40);
+                botonesAsientos[i][j].setFont(fuenteLetra);
+                botonesAsientos[i][j].setForeground(Color.WHITE);
+                botonesAsientos[i][j].setBackground(Color.BLACK);
+                botonesAsientos[i][j].setText(Character.toString((char) ('A' + i)) + (j + 1));
+                botonesAsientos[i][j].addActionListener(new AccionBotones());
+                bg.add(botonesAsientos[i][j]);
+
+                ejeX += 51;
+            }
+            ejeX = 10;
+            ejeY += 42;
+        }
+
+        bg.revalidate();
+        bg.repaint();
+    }
+
+    private class AccionBotones implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                if (ae.getSource().equals(botonesAsientos[i][j])) {
+                    String asiento = botonesAsientos[i][j].getText();
+
+                    if (botonesAsientos[i][j].getBackground().equals(Color.CYAN)) {
+                        asientosSeleccionados.remove(asiento);
+                        botonesAsientos[i][j].setBackground(Color.BLACK);
+                        botonesAsientos[i][j].setForeground(Color.WHITE);
+                    } else {
+                        asientosSeleccionados.add(asiento);
+                        botonesAsientos[i][j].setBackground(Color.CYAN);
+                        botonesAsientos[i][j].setForeground(Color.BLACK);
+                    }
+                }
+            }
+        }
+    }
+}
+
+    
+    /**
+     * Método para obtener la lista de asientos seleccionados.
+     */
+    public static ArrayList<String> obtenerAsientosSeleccionados() {
+        return new ArrayList<>(asientosSeleccionados);
+    }
+    
     private void guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseExited
         guardar.setBackground(new Color(102,0,102));
     }//GEN-LAST:event_guardarMouseExited
@@ -178,6 +279,58 @@ public class Butacas extends javax.swing.JFrame {
 
         System.exit(0);    }//GEN-LAST:event_guardarMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        calcularPrecioTotal();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazVenta().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+ * Método para calcular el precio total en base a los asientos seleccionados
+ * y el formato elegido en la interfaz InterfazVenta.
+ */
+    public void calcularPrecioTotal() {
+        // Obtener la lista de asientos seleccionados
+        ArrayList<String> asientos = obtenerAsientosSeleccionados();
+        int cantidadAsientos = asientos.size();
+
+        if (cantidadAsientos == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione al menos un asiento.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Definir precios por formato
+        int precioUnitario;
+        switch (formatoSeleccionado) {
+            case "2D":
+                precioUnitario = 30;
+                break;
+            case "3D":
+                precioUnitario = 40;
+                break;
+            case "4D":
+                precioUnitario = 50;
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Formato no válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+
+        // Calcular el precio total
+        int precioTotal = cantidadAsientos * precioUnitario;
+
+        // Mostrar el resultado
+        JOptionPane.showMessageDialog(this, "Cantidad de asientos: " + cantidadAsientos +
+                "\nPrecio unitario: " + precioUnitario + " Bs." +
+                "\nPrecio total: " + precioTotal + " Bs.", 
+                "Resumen de compra", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    
       public static boolean esTextoNumerico(String texto) {
         // Si el texto es nulo o está vacío, no es numérico.
         if (texto == null || texto.equals("")) {
@@ -223,6 +376,8 @@ public class Butacas extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -244,6 +399,7 @@ public class Butacas extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JLabel cerrarlbl;
     private javax.swing.JPanel guardar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel prece;
     private javax.swing.JLabel titulolbl;
     // End of variables declaration//GEN-END:variables

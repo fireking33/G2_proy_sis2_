@@ -146,6 +146,16 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
             }
         });
 
+        menulbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menulbl.setForeground(new java.awt.Color(204, 204, 204));
+        menulbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menulbl.setText("MENU");
+        menulbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menulblMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuFLayout = new javax.swing.GroupLayout(menuF);
         menuF.setLayout(menuFLayout);
         menuFLayout.setHorizontalGroup(
@@ -175,6 +185,10 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
             }
         });
 
+        ticlbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ticlbl.setForeground(new java.awt.Color(204, 204, 204));
+        ticlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ticlbl.setText("VENDER");
         ticlbl.setPreferredSize(new java.awt.Dimension(70, 70));
 
         javax.swing.GroupLayout ticFLayout = new javax.swing.GroupLayout(ticF);
@@ -213,6 +227,11 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
             }
         });
 
+        candylbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        candylbl.setForeground(new java.awt.Color(204, 204, 204));
+        candylbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        candylbl.setText("CANDY");
+
         javax.swing.GroupLayout candyFLayout = new javax.swing.GroupLayout(candyF);
         candyF.setLayout(candyFLayout);
         candyFLayout.setHorizontalGroup(
@@ -248,6 +267,10 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
             }
         });
 
+        usulbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usulbl.setForeground(new java.awt.Color(204, 204, 204));
+        usulbl.setText("MENU US");
+
         javax.swing.GroupLayout usuFLayout = new javax.swing.GroupLayout(usuF);
         usuF.setLayout(usuFLayout);
         usuFLayout.setHorizontalGroup(
@@ -275,6 +298,11 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 whatsaFMouseExited(evt);
             }
         });
+
+        whatsalbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        whatsalbl.setForeground(new java.awt.Color(204, 204, 204));
+        whatsalbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        whatsalbl.setText("CONTACTO");
 
         javax.swing.GroupLayout whatsaFLayout = new javax.swing.GroupLayout(whatsaF);
         whatsaF.setLayout(whatsaFLayout);
@@ -365,32 +393,33 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 peliculasComboBoxActionPerformed(evt);
             }
         });
-        bg.add(peliculasComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 200, 30));
+        bg.add(peliculasComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 200, 30));
 
         tituloGestion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tituloGestion.setForeground(new java.awt.Color(255, 255, 255));
         tituloGestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloGestion.setText("Gestion de Funciones");
-        bg.add(tituloGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 390, 40));
+        tituloGestion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        bg.add(tituloGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 390, 40));
 
         subTituloFunciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subTituloFunciones.setForeground(new java.awt.Color(255, 255, 255));
         subTituloFunciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subTituloFunciones.setText("Funciones:");
-        bg.add(subTituloFunciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 180, 40));
+        bg.add(subTituloFunciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 130, 40));
 
         subtitulosPeliculas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subtitulosPeliculas.setForeground(new java.awt.Color(255, 255, 255));
         subtitulosPeliculas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subtitulosPeliculas.setText("Peliculas:");
-        bg.add(subtitulosPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 140, 40));
+        bg.add(subtitulosPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 140, 40));
 
         horarioPanel.setBackground(new java.awt.Color(102, 0, 102));
 
         horarioTexto.setBackground(new java.awt.Color(102, 0, 102));
         horarioTexto.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        horarioTexto.setForeground(java.awt.Color.gray);
-        horarioTexto.setText("1500-1700");
+        horarioTexto.setForeground(new java.awt.Color(153, 153, 153));
+        horarioTexto.setText("HH:MM:SS");
         horarioTexto.setBorder(null);
         horarioTexto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -408,9 +437,8 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
         horarioPanelLayout.setHorizontalGroup(
             horarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, horarioPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         horarioPanelLayout.setVerticalGroup(
             horarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,17 +447,16 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 .addComponent(horarioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bg.add(horarioPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 150, 30));
+        bg.add(horarioPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 150, 30));
 
         subAnia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subAnia.setForeground(new java.awt.Color(255, 255, 255));
         subAnia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subAnia.setText("Añadir Peliculas a Funciones:");
-        bg.add(subAnia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 390, 40));
+        bg.add(subAnia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 390, 40));
 
-        aniadirBtn.setBackground(new java.awt.Color(102, 0, 102));
+        aniadirBtn.setBackground(new java.awt.Color(0, 255, 0));
         aniadirBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        aniadirBtn.setForeground(new java.awt.Color(255, 255, 255));
         aniadirBtn.setText("AÑADIR+");
         aniadirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         aniadirBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -445,13 +472,13 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 aniadirBtnActionPerformed(evt);
             }
         });
-        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 160, 40));
+        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, 160, 50));
 
         subAnia1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subAnia1.setForeground(new java.awt.Color(255, 255, 255));
         subAnia1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subAnia1.setText("Eliminar Peliculas:");
-        bg.add(subAnia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 220, 40));
+        bg.add(subAnia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 220, 40));
 
         funcionesParaModificarComboBox1.setBackground(new java.awt.Color(102, 0, 102));
         funcionesParaModificarComboBox1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -462,15 +489,15 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 funcionesParaModificarComboBox1ActionPerformed(evt);
             }
         });
-        bg.add(funcionesParaModificarComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 190, 30));
+        bg.add(funcionesParaModificarComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 190, 30));
 
         subtitulosPeliculas1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         subtitulosPeliculas1.setForeground(new java.awt.Color(255, 255, 255));
         subtitulosPeliculas1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subtitulosPeliculas1.setText("Peliculas:");
-        bg.add(subtitulosPeliculas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 140, 40));
+        bg.add(subtitulosPeliculas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 140, 40));
 
-        buscarBtn.setBackground(new java.awt.Color(102, 0, 102));
+        buscarBtn.setBackground(new java.awt.Color(0, 0, 255));
         buscarBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
         buscarBtn.setText("BUSCAR");
@@ -488,11 +515,10 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 buscarBtnActionPerformed(evt);
             }
         });
-        bg.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 160, 40));
+        bg.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 160, 50));
 
-        eliminarBtn.setBackground(new java.awt.Color(102, 0, 102));
+        eliminarBtn.setBackground(new java.awt.Color(255, 0, 0));
         eliminarBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        eliminarBtn.setForeground(new java.awt.Color(255, 255, 255));
         eliminarBtn.setText("ELIMINAR");
         eliminarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -508,14 +534,14 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
                 eliminarBtnActionPerformed(evt);
             }
         });
-        bg.add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 160, 40));
+        bg.add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, 160, 50));
 
         nombrePelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombrePeliculaActionPerformed(evt);
             }
         });
-        bg.add(nombrePelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 180, -1));
+        bg.add(nombrePelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 200, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -601,7 +627,7 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     }//GEN-LAST:event_peliculasComboBoxActionPerformed
 
     private void horarioTextoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horarioTextoMousePressed
-        if(horarioTexto.getText().equals("1500-1700")){
+        if(horarioTexto.getText().equals("HH:MM:SS")){
         horarioTexto.setText("");
        horarioTexto.setForeground(Color.white);
        }
@@ -896,6 +922,15 @@ public class InterfazGestionFunciones extends javax.swing.JFrame {
     private void nombrePeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePeliculaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombrePeliculaActionPerformed
+
+    private void menulblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menulblMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdmin().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_menulblMouseClicked
 
       public static boolean esTextoNumerico(String texto) {
         // Si el texto es nulo o está vacío, no es numérico.

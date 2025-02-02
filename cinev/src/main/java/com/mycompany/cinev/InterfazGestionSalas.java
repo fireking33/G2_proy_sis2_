@@ -7,19 +7,13 @@ package com.mycompany.cinev;
 import java.awt.Color;
 
 import java.awt.Image;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 /**
  *
  * @author fband
@@ -36,6 +30,7 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
      */
     public InterfazGestionSalas() {
         initComponents();
+        cargarSalas();
         this.setLocationRelativeTo(this);
         SetImageLabel(menulbl,"src/main/java/images/Menu75.png");
         SetImageLabel(candylbl,"src/main/java/images/Store 75.png");
@@ -72,13 +67,13 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         cerrarlbl = new javax.swing.JLabel();
         nombreSalaPanel = new javax.swing.JPanel();
         nombreSalalbl = new javax.swing.JLabel();
-        nombreSalaText = new javax.swing.JTextField();
         tituloGestionSalas = new javax.swing.JLabel();
         aniadirBtn = new javax.swing.JToggleButton();
         subTituloaniadir = new javax.swing.JLabel();
         subTituloAdFun = new javax.swing.JLabel();
         salasCombobox = new javax.swing.JComboBox<>();
         administrarBtn = new javax.swing.JToggleButton();
+        nombreSalaText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(11, 23, 128));
@@ -95,11 +90,24 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         menuF.setBackground(new java.awt.Color(17, 27, 82));
         menuF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuFMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuFMouseExited(evt);
+            }
+        });
+
+        menulbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menulbl.setForeground(new java.awt.Color(204, 204, 204));
+        menulbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menulbl.setText("MENU");
+        menulbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menulblMouseClicked(evt);
             }
         });
 
@@ -132,6 +140,10 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
             }
         });
 
+        ticlbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ticlbl.setForeground(new java.awt.Color(204, 204, 204));
+        ticlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ticlbl.setText("VENDER");
         ticlbl.setPreferredSize(new java.awt.Dimension(70, 70));
 
         javax.swing.GroupLayout ticFLayout = new javax.swing.GroupLayout(ticF);
@@ -170,6 +182,11 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
             }
         });
 
+        candylbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        candylbl.setForeground(new java.awt.Color(204, 204, 204));
+        candylbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        candylbl.setText("CANDY");
+
         javax.swing.GroupLayout candyFLayout = new javax.swing.GroupLayout(candyF);
         candyF.setLayout(candyFLayout);
         candyFLayout.setHorizontalGroup(
@@ -205,6 +222,10 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
             }
         });
 
+        usulbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usulbl.setForeground(new java.awt.Color(204, 204, 204));
+        usulbl.setText("MENU US");
+
         javax.swing.GroupLayout usuFLayout = new javax.swing.GroupLayout(usuF);
         usuF.setLayout(usuFLayout);
         usuFLayout.setHorizontalGroup(
@@ -232,6 +253,11 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
                 whatsaFMouseExited(evt);
             }
         });
+
+        whatsalbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        whatsalbl.setForeground(new java.awt.Color(204, 204, 204));
+        whatsalbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        whatsalbl.setText("CONTACTO");
 
         javax.swing.GroupLayout whatsaFLayout = new javax.swing.GroupLayout(whatsaF);
         whatsaF.setLayout(whatsaFLayout);
@@ -319,42 +345,32 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
         nombreSalalbl.setForeground(new java.awt.Color(255, 255, 255));
         nombreSalalbl.setText("Nombre de Sala:");
 
-        nombreSalaText.setBackground(new java.awt.Color(102, 0, 102));
-        nombreSalaText.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        nombreSalaText.setForeground(new java.awt.Color(255, 255, 255));
-        nombreSalaText.setBorder(null);
-
         javax.swing.GroupLayout nombreSalaPanelLayout = new javax.swing.GroupLayout(nombreSalaPanel);
         nombreSalaPanel.setLayout(nombreSalaPanelLayout);
         nombreSalaPanelLayout.setHorizontalGroup(
             nombreSalaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nombreSalaPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(nombreSalalbl, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreSalaText, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 256, Short.MAX_VALUE))
         );
         nombreSalaPanelLayout.setVerticalGroup(
             nombreSalaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nombreSalaPanelLayout.createSequentialGroup()
-                .addGroup(nombreSalaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nombreSalaText)
-                    .addComponent(nombreSalalbl, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nombreSalaPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(nombreSalalbl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bg.add(nombreSalaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 400, 40));
+        bg.add(nombreSalaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 400, 40));
 
         tituloGestionSalas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tituloGestionSalas.setForeground(new java.awt.Color(255, 255, 255));
         tituloGestionSalas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloGestionSalas.setText("Gestion de Salas");
-        bg.add(tituloGestionSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 390, 40));
+        tituloGestionSalas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        bg.add(tituloGestionSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 290, 40));
 
-        aniadirBtn.setBackground(new java.awt.Color(102, 0, 102));
-        aniadirBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        aniadirBtn.setForeground(new java.awt.Color(255, 255, 255));
+        aniadirBtn.setBackground(new java.awt.Color(0, 255, 0));
+        aniadirBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         aniadirBtn.setText("AÑADIR+");
         aniadirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         aniadirBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -370,33 +386,32 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
                 aniadirBtnActionPerformed(evt);
             }
         });
-        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 160, 40));
+        bg.add(aniadirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 190, 50));
 
         subTituloaniadir.setBackground(new java.awt.Color(13, 20, 58));
         subTituloaniadir.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         subTituloaniadir.setForeground(new java.awt.Color(255, 255, 255));
         subTituloaniadir.setText("Añadir Sala:");
-        bg.add(subTituloaniadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 280, 30));
+        bg.add(subTituloaniadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 140, 30));
 
         subTituloAdFun.setBackground(new java.awt.Color(13, 20, 58));
         subTituloAdFun.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         subTituloAdFun.setForeground(new java.awt.Color(255, 255, 255));
         subTituloAdFun.setText("Administrar Funciones de Salas:");
-        bg.add(subTituloAdFun, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 330, 30));
+        bg.add(subTituloAdFun, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 310, 30));
 
         salasCombobox.setBackground(new java.awt.Color(102, 0, 102));
         salasCombobox.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         salasCombobox.setForeground(new java.awt.Color(255, 255, 255));
-        salasCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         salasCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salasComboboxActionPerformed(evt);
             }
         });
-        bg.add(salasCombobox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 360, 30));
+        bg.add(salasCombobox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 330, 30));
 
-        administrarBtn.setBackground(new java.awt.Color(102, 0, 102));
-        administrarBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        administrarBtn.setBackground(new java.awt.Color(0, 0, 255));
+        administrarBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         administrarBtn.setForeground(new java.awt.Color(255, 255, 255));
         administrarBtn.setText("Administrar");
         administrarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -413,16 +428,24 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
                 administrarBtnActionPerformed(evt);
             }
         });
-        bg.add(administrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 160, 40));
+        bg.add(administrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 190, 50));
+
+        nombreSalaText.setBackground(new java.awt.Color(102, 0, 102));
+        nombreSalaText.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        nombreSalaText.setForeground(new java.awt.Color(255, 255, 255));
+        nombreSalaText.setBorder(null);
+        nombreSalaText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreSalaTextActionPerformed(evt);
+            }
+        });
+        bg.add(nombreSalaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 250, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,6 +642,28 @@ public class InterfazGestionSalas extends javax.swing.JFrame {
     private void salasComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salasComboboxActionPerformed
         
     }//GEN-LAST:event_salasComboboxActionPerformed
+
+    private void menuFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdmin().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_menuFMouseClicked
+
+    private void menulblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menulblMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdmin().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_menulblMouseClicked
+
+    private void nombreSalaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSalaTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreSalaTextActionPerformed
 
       
       

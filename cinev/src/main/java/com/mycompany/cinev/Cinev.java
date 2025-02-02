@@ -13,7 +13,7 @@ public class Cinev {
         System.out.print("HOla");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazRegPeli().setVisible(true);
+                new InterfazAdmin().setVisible(true);
             }
         });
     }
