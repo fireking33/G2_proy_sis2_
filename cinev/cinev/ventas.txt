@@ -1,0 +1,11 @@
+Pelicula: vemgadores
+Horario: 12:01:01
+Sala: SALA &    
+Cliente: 0123132 13211
+NIT: fsadfsdf
+CI: dasdad
+Formato: 2D
+Numero de Boletos: 26
+Precio Boleto: 62 Bs.
+Precio Total: 1612 Bs.
+-----------------------------------------
